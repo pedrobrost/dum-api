@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    environment:
+      DB_NAME: $DB_NAME
+      DB_USERNAME: $DB_USERNAME
+      DB_PASSWORD: $DB_PASSWORD
+      WAIT_HOSTS: mongodb:27017
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:4.2.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $DB_ROOT_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MONGO_INITDB_DATABASE: $DB_NAME
+      MONGO_INITDB_USERNAME: $DB_USERNAME
+      MONGO_INITDB_PASSWORD: $DB_PASSWORD
+    volumes:
+      - data:/data/db
+      - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+
+volumes:
+  data:
