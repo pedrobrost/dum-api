@@ -5,12 +5,14 @@ module.exports = {
     body: {
       name: Joi.string().required(),
       address: Joi.string().required(),
+      phone: Joi.string().required(),
     },
   },
   update: {
     body: {
       name: Joi.string(),
       address: Joi.string(),
+      phone: Joi.string(),
     },
     params: {
       id: Joi.string()

@@ -7,6 +7,7 @@ const CustomerSchema = new mongoose.Schema(
   {
     name: String,
     address: String,
+    phone: String,
   },
   {
     timestamps: true,
