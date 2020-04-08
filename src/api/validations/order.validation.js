@@ -5,7 +5,7 @@ module.exports = {
   create: {
     body: {
       customer: Joi.objectId().required(),
-      description: Joi.string().required(),
+      description: Joi.string().allow(""),
       address: Joi.string().required(),
       products: Joi.array().items(
         Joi.object().keys({
