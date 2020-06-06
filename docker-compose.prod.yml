@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  reverse_proxy:
+    image: caddy:2.0.0
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - caddy_data:/data
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+    environment:
+      - SERVICE=app:${PORT}
+
   app:
     restart: always
     environment:
@@ -8,3 +19,6 @@ services:
 
   mongodb:
     restart: always
+
+volumes:
+  caddy_data:

@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   app:
@@ -8,8 +8,6 @@ services:
       DB_USERNAME: $DB_USERNAME
       DB_PASSWORD: $DB_PASSWORD
       WAIT_HOSTS: mongodb:27017
-    ports:
-      - ${PORT}:${PORT}
     depends_on:
       - mongodb
 
