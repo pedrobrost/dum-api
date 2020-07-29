@@ -21,6 +21,26 @@ const OrderSchema = new mongoose.Schema(
   }
 );
 
-OrderSchema.statics = {};
+OrderSchema.statics = {
+  async patch(id, body) {
+    try {
+      let order;
+      if (mongoose.Types.ObjectId.isValid(id)) {
+        order = await this.findByIdAndUpdate(
+          id,
+          { $set: omit(body, ["_id"]) },
+          { new: true, runValidators: true }
+        ).exec();
+      }
+      if (order) return order;
+      throw new APIError({
+        message: "Order not found",
+        status: httpStatus.NOT_FOUND,
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
+};
 
 module.exports = mongoose.model("Order", OrderSchema);
