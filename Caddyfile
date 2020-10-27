@@ -1,3 +1,3 @@
-api.dum.com.ar
+api.dumgastronomia.tk
 
 reverse_proxy {$SERVICE}
